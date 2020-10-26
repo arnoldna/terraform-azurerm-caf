@@ -23,7 +23,7 @@
 
 
 resource "azurerm_shared_image_gallery" "gallery" {
-  for_each = local.shared_services.shared_image_gallery.galleries
+  for_each = try(local.shared_services.shared_image_gallery.galleries, {})
   name     = each.value.name
   #azurecaf_name.sig_name[each.key].result
   resource_group_name = module.resource_groups[each.value.resource_group_key].name
@@ -34,7 +34,7 @@ resource "azurerm_shared_image_gallery" "gallery" {
 
 
 resource "azurerm_shared_image" "image" {
-  for_each = local.shared_services.shared_image_gallery.image_definition
+  for_each = try(local.shared_services.shared_image_gallery.image_definition, {})
   name     = each.value.name
   #azurecaf_name.image_definition_name[each.key].result
   gallery_name        = azurerm_shared_image_gallery.gallery[each.value.gallery_key].name
@@ -50,7 +50,8 @@ resource "azurerm_shared_image" "image" {
 }
 
 resource "null_resource" "packer-exec" {
-  count = local.shared_services.packer.use_packer ? 1 : 0
+  for_each = try(local.shared_services.packer, {})
+  #count = local.shared_services.packer.use_packer ? 1 : 0
   provisioner "local-exec" {
     command = "packer build -var-file=${local.shared_services.packer.packer_configuration_file_path} ${local.shared_services.packer.packer_file_path}"
   }
