@@ -50,9 +50,9 @@ resource "azurerm_shared_image" "image" {
 }
 
 resource "null_resource" "packer-exec" {
-  for_each = try(local.shared_services.packer, {})
-  #count = local.shared_services.packer.use_packer ? 1 : 0
+  count = local.shared_services.packer.use_packer ? 1 : 0
   provisioner "local-exec" {
     command = "packer build -var-file=${local.shared_services.packer.packer_configuration_file_path} ${local.shared_services.packer.packer_file_path}"
+ 
   }
 }
