@@ -70,6 +70,7 @@ resource_groups = {
   key = {
     name = "<string>"
   }
+  # repeat the block to create resource groups
 }
 
 shared_image_gallery = {
@@ -94,7 +95,7 @@ shared_image_gallery = {
       offer     = "<string>"
       sku       = "<string>" # must be in specific format. refer Product Docs
       }
-      # repeat the block to create multiple galleries
+      # repeat the block to create multiple Image Definitions
   }
 
 }
@@ -104,7 +105,7 @@ packer = {
   packer_file_path = "<string_path>"
   packer_configuration_file_path = "<string_path>"
 
-// once galleries and definitions are created, change the use_packer value to True and re-run. This is important due to Packer's dependancy on Shared Image Galleries and Definitions. //
+// once galleries and definitions are created, change the use_packer value to True and re-run. This is important due to Packer's dependancy on Shared Image Galleries and Definitions.//
 
 }
 ```
@@ -135,7 +136,6 @@ image_sku = "<string>"
 location = "<string>"
 vm_size = "<string>" # refer Azure VM docs for the available VM Sizes
 playbook_path = "<string_path>"  
-
 // for Ansible Playbook. If you are using a different provisioner, like Shell Script or PowerShell, remove this variable and edit the Packer script accordingly.//
 
 ```
