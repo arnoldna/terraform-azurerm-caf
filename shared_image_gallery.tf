@@ -53,6 +53,5 @@ resource "null_resource" "packer-exec" {
   count = local.shared_services.packer.use_packer ? 1 : 0
   provisioner "local-exec" {
     command = "packer build -var-file=${local.shared_services.packer.packer_configuration_file_path} ${local.shared_services.packer.packer_file_path}"
- 
-  }
+   }
 }
