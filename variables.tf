@@ -12,6 +12,8 @@ variable global_settings {
 
 variable tenant_id {}
 
+variable current_landingzone_key {}
+
 variable tfstates {
   default = {}
 }
@@ -132,6 +134,10 @@ variable keyvaults {
 }
 
 variable keyvault_access_policies {
+  default = {}
+}
+
+variable keyvault_access_policies_azuread_apps {
   default = {}
 }
 

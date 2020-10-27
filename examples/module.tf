@@ -1,6 +1,7 @@
 module "caf" {
   source = "../"
 
+  current_landingzone_key     = var.landingzone.key
   tenant_id                   = var.tenant_id
   diagnostic_storage_accounts = var.diagnostic_storage_accounts
   logged_user_objectId        = var.logged_user_objectId
@@ -28,6 +29,7 @@ module "caf" {
     network_security_group_definition = var.network_security_group_definition
     public_ip_addresses               = var.public_ip_addresses
     private_dns                       = var.private_dns
+    virtual_wans                      = var.virtual_wans
   }
   database = {
     azurerm_redis_caches        = var.azurerm_redis_caches

@@ -45,6 +45,7 @@ locals {
     random_length      = lookup(var.global_settings, "random_length", null)
     regions            = var.global_settings.regions
     passthrough        = try(var.global_settings.passthrough, false)
+    inherit_tags       = try(var.global_settings.inherit_tags, false)
   }
 
 
@@ -94,6 +95,7 @@ locals {
     object_id               = data.azurerm_client_config.current.object_id
     logged_aad_app_objectId = var.logged_aad_app_objectId == null ? var.logged_user_objectId == null ? data.azuread_service_principal.logged_in_app.0.object_id : var.logged_user_objectId : var.logged_aad_app_objectId
     logged_user_objectId    = var.logged_user_objectId == null ? var.logged_aad_app_objectId == null ? data.azuread_service_principal.logged_in_app.0.object_id : var.logged_aad_app_objectId : var.logged_user_objectId
+    landingzone_key         = var.current_landingzone_key
   }
 
   webapp = {
