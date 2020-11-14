@@ -24,12 +24,22 @@ express_route_circuits = {
 express_route_circuit_authorizations = {
   key1 = {
     name               = "er_centralus_np"
-    resource_group_key = "vm_region1 "
+    resource_group_key = "vm_region1"
     express_route_key  = "er1"
   }
   key2 = {
     name               = "er_centralus_prod"
-    resource_group_key = "vm_region1 "
+    resource_group_key = "vm_region1"
     express_route_key  = "er1"
+  }
+}
+
+express_route_circuit_gateways = {
+  gateway1 = {
+    name               = "er_centralus_np"
+    resource_group_key = "vm_region1"
+    express_route_key  = "er1"
+    virtual_hub_id     = ""
+    scale_units        = 1
   }
 }

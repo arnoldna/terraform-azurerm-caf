@@ -31,6 +31,23 @@ module express_route_circuit_authorizations {
   express_route_circuit_name = module.express_route_circuits[each.value.express_route_key].name
 }
 
+#
+#
+# Express Route Gateways
+#
+#
+
+module express_route_circuit_gateways {
+  source   = "./modules/networking/express_route_circuit_gateway"
+  for_each = local.networking.express_route_circuit_gateway
+
+  settings                   = each.value
+  resource_group_name        = module.express_route_circuits[each.value.express_route_key].resource_group_name
+  location                   = lookup(each.value, "region", null) == null ? module.resource_groups[each.value.resource_group_key].location : local.global_settings.regions[each.value.region]
+  express_route_circuit_name = module.express_route_circuits[each.value.express_route_key].name
+  virtual_hub_id             = try(module.virtual_wans[each.value.vhub.virtual_wan_key].virtual_hubs[each.value.vhub.virtual_hub_key].id, null)
+}
+
 
 # Outputs
 output express_route_circuits {
@@ -43,4 +60,10 @@ output express_route_circuit_authorizations {
   value       = module.express_route_circuit_authorizations
   sensitive   = false
   description = "Express Route Circuit Authorizations Keys output"
+}
+
+output express_route_circuit_gateways {
+  value       = module.express_route_circuit_gateways
+  sensitive   = false
+  description = "Express Route Circuit Gateways IDs output"
 }

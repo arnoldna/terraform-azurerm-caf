@@ -16,5 +16,6 @@ module "caf" {
     public_ip_addresses                  = var.public_ip_addresses
     express_route_circuit_authorizations = var.express_route_circuit_authorizations
     express_route_circuits               = var.express_route_circuits
+    express_route_circuit_gateways       = var.express_route_circuit_gateways
   }
 }
